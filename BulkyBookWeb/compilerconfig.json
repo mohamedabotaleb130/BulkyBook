@@ -1,0 +1,10 @@
+﻿[
+  {
+    "outputFile": "wwwroot/carousel/scss/style.css",
+    "inputFile": "wwwroot/carousel/scss/style.scss"
+  },
+  {
+    "outputFile": "wwwroot/carousel/scss/stree.css",
+    "inputFile": "wwwroot/carousel/scss/stree.scss"
+  }
+]
