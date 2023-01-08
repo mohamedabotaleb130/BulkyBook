@@ -1,4 +1,6 @@
-﻿@{
+﻿<div class="container"
+
+@{
     if (ViewData.TryGetValue("ParentLayout", out var parentLayout))
     {
         Layout = (string)parentLayout;
@@ -9,17 +11,15 @@
     }
 }
 
-<h1>Manage your account</h1>
+
+<h2>Manage your account</h2>
 
 <div>
-    <h2>Change your account settings</h2>
+    <h4>Change your account settings</h4>
     <hr />
     <div class="row">
         <div class="col-md-3">
             <partial name="_ManageNav" />
-        </div>
-        <div class="col-md-3">
-            <partial name="login" />
         </div>
         <div class="col-md-9">
             @RenderBody()
@@ -30,3 +30,4 @@
 @section Scripts {
     @RenderSection("Scripts", required: false)
 }
+</div>

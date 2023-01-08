@@ -35,25 +35,25 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
         private readonly IUserEmailStore<ApplicationUser> _emailStore;
         private readonly ILogger<RegisterModel> _logger;
         private readonly IEmailSender _emailSender;
-		private readonly RoleManager<IdentityRole> _roleManager;
-		private readonly IUnitOfWork _unitOfWork;
+        private readonly RoleManager<IdentityRole> _roleManager;
+        private readonly IUnitOfWork _unitOfWork;
 
 
-		public RegisterModel(
+        public RegisterModel(
             UserManager<ApplicationUser> userManager,
             IUserStore<ApplicationUser> userStore,
             SignInManager<ApplicationUser> signInManager,
             ILogger<RegisterModel> logger,
             IEmailSender emailSender,
 
-			RoleManager<IdentityRole> roleManager,
+            RoleManager<IdentityRole> roleManager,
 
            IUnitOfWork unitOfWork)
 
         //RoleManager<ApplicationUser> roleManagers)
-        { 
+        {
 
-			_userManager = userManager;
+            _userManager = userManager;
             _userStore = userStore;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
@@ -88,7 +88,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
         /// </summary>
         public class InputModel
         {
-           
+
 
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
@@ -106,9 +106,9 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
             [Display(Name = "Email")]
             public string Email { get; set; }
 
-            
 
-            
+
+
             [Required]
             [StringLength(100, ErrorMessage = "The {0} must be at least {2} and at max {1} characters long.", MinimumLength = 6)]
             [DataType(DataType.Password)]
@@ -119,6 +119,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
+             [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -126,20 +127,19 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
 
 
 
-			[Required]
-			public string? StreetAddress { get; set; }
-			public string? City { get; set; }
-			public string? State { get; set; }
-			public string? PostalCode { get; set; }
-			public string? PhoneNumber { get; set; }
-			public string? Role { get; set; }
+            public string? StreetAddress { get; set; }
+            public string? City { get; set; }
+            public string? State { get; set; }
+            public string? PostalCode { get; set; }
+            public string? PhoneNumber { get; set; }
+            public string? Role { get; set; }
             public int? CompanyId { get; set; }
 
             [ValidateNever]
             public IEnumerable<SelectListItem> RoleList { get; set; }
-			[ValidateNever]
-			public IEnumerable<SelectListItem> CompanyList { get; set; }
-		}
+            [ValidateNever]
+            public IEnumerable<SelectListItem> CompanyList { get; set; }
+        }
 
 
         public async Task OnGetAsync(string returnUrl = null)
@@ -147,14 +147,14 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
             if (!_roleManager.RoleExistsAsync(SD.Role_Admin).GetAwaiter().GetResult())
             {
 
-          
-            _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Comp)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Indi)).GetAwaiter().GetResult();
-            _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
 
-			}
-			ReturnUrl = returnUrl;
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Admin)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Comp)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_User_Indi)).GetAwaiter().GetResult();
+                _roleManager.CreateAsync(new IdentityRole(SD.Role_Employee)).GetAwaiter().GetResult();
+
+            }
+            ReturnUrl = returnUrl;
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
 
             Input = new InputModel()
@@ -164,13 +164,13 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
                     Text = i,
                     Value = i
                 }),
-				CompanyList = _unitOfWork.Company.GetAll().Select(i=>new SelectListItem
-                
-				{
-					Text = i.Name,
-					Value = i.Id.ToString()
-				}),
-			};
+                CompanyList = _unitOfWork.Company.GetAll().Select(i => new SelectListItem
+
+                {
+                    Text = i.Name,
+                    Value = i.Id.ToString()
+                }),
+            };
 
         }
 
@@ -180,20 +180,20 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
             if (ModelState.IsValid)
             {
-				MailAddress address = new MailAddress(Input.Email);
-				string userName = address.User;
+                MailAddress address = new MailAddress(Input.Email);
+                string userName = address.User;
 
-				var user = new ApplicationUser
+                var user = new ApplicationUser
                 {
                     UserName = new MailAddress(Input.Email).User,
                     Email = Input.Email,
                     FirstName = Input.FirstName,
                     LastName = Input.LastName,
-                    City=Input.City,
-                    StreetAddress=Input.StreetAddress,
-                    State=Input.State,
-                    PostalCode=Input.PostalCode,
-                    PhoneNumber=Input.PhoneNumber,
+                    City = Input.City,
+                    StreetAddress = Input.StreetAddress,
+                    State = Input.State,
+                    PostalCode = Input.PostalCode,
+                    PhoneNumber = Input.PhoneNumber,
 
                 };
                 if (Input.Role == SD.Role_User_Comp)

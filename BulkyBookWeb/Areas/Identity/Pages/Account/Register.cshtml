@@ -1,163 +1,442 @@
 ﻿@page
 @using BulkyBook.Utility
-<div class="container ">
+
 
 @model RegisterModel
 @{
-    ViewData["Title"] = "Register";
+
 }
 @if (User.IsInRole(SD.Role_Admin))
 {
 
-    <h1 class="pt-4">Register - ADMIN PORTAL</h1>
+    <h1 class="">Register-ADMIN PORTAL</h1>
 }
 else
 {
-    <h1 class="pt-4">@ViewData["Title"]</h1>
+    <h1 class="">@ViewData["Title"]</h1>
 }
-<div class="row pt-4">
-    <div class="col-md-7 ">
-        <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
-            <h2>Create a new account.</h2>
-            <hr />
-            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
-            <div class="form-floating py-2 col-6">
-                <input asp-for="Input.Email" class="form-control" autocomplete="username" aria-required="true" />
-                <label asp-for="Input.Email"></label>
+
+<style>
+
+    :root {
+        --main-dark: #292c46;
+        --main-light: #f3f3f3;
+        --orange: #ff7626;
+    }
+
+    html, body, #app {
+        padding: 0;
+        margin: 0;
+        height: 100%;
+        font-family: 'Roboto', sans-serif;
+        font-weight: 400;
+        color: var(--main-dark);
+    }
+
+    #app {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        background-color: #D4FFCA;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3CradialGradient id='a' cx='0' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2388f5b7'/%3E%3Cstop offset='1' stop-color='%2388f5b7' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cx='1200' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23d7ff9a'/%3E%3Cstop offset='1' stop-color='%23d7ff9a' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='600' cy='0' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%235bf15e'/%3E%3Cstop offset='1' stop-color='%235bf15e' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='d' cx='600' cy='800' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23D4FFCA'/%3E%3Cstop offset='1' stop-color='%23D4FFCA' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='e' cx='0' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2352D8DF'/%3E%3Cstop offset='1' stop-color='%2352D8DF' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='f' cx='1200' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23FFFD69'/%3E%3Cstop offset='1' stop-color='%23FFFD69' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1200' height='800'/%3E%3Crect fill='url(%23b)' width='1200' height='800'/%3E%3Crect fill='url(%23c)' width='1200' height='800'/%3E%3Crect fill='url(%23d)' width='1200' height='800'/%3E%3Crect fill='url(%23e)' width='1200' height='800'/%3E%3Crect fill='url(%23f)' width='1200' height='800'/%3E%3C/svg%3E");
+        background-attachment: fixed;
+        background-size: cover;
+    }
+
+        #app.dark {
+            background-color: #000000;
+            background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3CradialGradient id='a' cx='0' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%230b132d'/%3E%3Cstop offset='1' stop-color='%230b132d' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cx='1200' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2318031d'/%3E%3Cstop offset='1' stop-color='%2318031d' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='600' cy='0' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%231e0d4a'/%3E%3Cstop offset='1' stop-color='%231e0d4a' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='d' cx='600' cy='800' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23000000'/%3E%3Cstop offset='1' stop-color='%23000000' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='e' cx='0' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23162759'/%3E%3Cstop offset='1' stop-color='%23162759' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='f' cx='1200' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23300639'/%3E%3Cstop offset='1' stop-color='%23300639' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1200' height='800'/%3E%3Crect fill='url(%23b)' width='1200' height='800'/%3E%3Crect fill='url(%23c)' width='1200' height='800'/%3E%3Crect fill='url(%23d)' width='1200' height='800'/%3E%3Crect fill='url(%23e)' width='1200' height='800'/%3E%3Crect fill='url(%23f)' width='1200' height='800'/%3E%3C/svg%3E");
+        }
+
+    .login-container {
+        width: 1060px;
+        height: 970px;
+        display: flex;
+        overflow: hidden;
+        border-radius: 40px;
+        box-shadow: 0 8px 32px 0 rgba( 31, 38, 135, 0.37 );
+    }
+
+    .scene-image-container {
+        width: 50%;
+        height: 100%;
+        position: relative;
+        transition: 0.5s all ease-out;
+    }
+
+    .login-container.signup .scene-image-container {
+        transform: translateX(100%)
+    }
+
+    .login-container.signup .login-form {
+        transform: translateX(-100%)
+    }
+
+    .scene-image {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        position: absolute;
+        opacity: 1;
+        transition: 1.5s all;
+    }
+
+    .dark-image {
+        opacity: 0;
+    }
+
+    #app.dark .light-image {
+        opacity: 0
+    }
+
+    #app.dark .dark-image {
+        opacity: 1
+    }
+
+    .login-form {
+        width: 60%;
+        height: 100%;
+        background: rgba( 255, 255, 255, 0.3 );
+        border: 1px solid rgba( 255, 255, 255, 0.18 );
+        transition: 0.5s all ease-out;
+    }
+
+    #app.dark .login-form {
+        background: rgb(255 255 255 / 7%);
+    }
+
+    .dark-mode-toggle {
+        width: 40px;
+        padding: 2px;
+        margin-left: auto;
+        margin-right: 35px;
+        margin-top: 35px;
+        border: 2px solid var(--main-dark);
+        background: transparent;
+        border-radius: 50px;
+    }
+
+    #app.dark .dark-mode-toggle {
+        border-color: var(--main-light)
+    }
+
+    .dark-mode-toggle-switch {
+        width: 20px;
+        height: 20px;
+        border-radius: 50px;
+        background-color: var(--main-dark);
+        transform: translateX(0);
+        transition: 0.5s all;
+    }
+
+    #app.dark .dark-mode-toggle-switch {
+        background-color: var(--main-light);
+        transform: translateX(100%);
+    }
+
+    .dark-mode-toggle-switch.dark {
+        /*   transform: translateX(100%); */
+    }
+
+    .login-form {
+        width: 50%
+    }
+
+    .login-form-title h1, .login-form-title h2 {
+        text-align: center;
+        color: var(--main-dark)
+    }
+
+    #app.dark .login-form-title h1, #app.dark .login-form-title h2 {
+        color: var(--main-light)
+    }
+
+    .login-form-title h1 {
+        margin-bottom: 0
+    }
+
+    .login-form-title h2 {
+        font-size: .9rem;
+        width: 75%;
+        margin: auto;
+        padding-bottom: 34px;
+    }
+
+    #app.dark .login-form-title h2 {
+        border-color: var(--main-light)
+    }
+
+    .login-form-title h2 .form-state-btn {
+        text-decoration: none;
+        color: var(--orange)
+    }
+
+    .the-valley {
+        font-family: 'Festive', cursive;
+        font-size: 3.5rem;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        margin-top: 34px;
+    }
+
+    .input {
+        border: none;
+        width: 400px;
+        height: 40px;
+        border-radius: 7px;
+        background-color: #ffffffa1;
+        font-size: 1rem;
+        padding: 0 .8rem;
+        box-sizing: border-box;
+    }
+
+    #app.dark input.input {
+        background-color: #ffff
+    }
+
+    .input:focus {
+        outline: 2px solid var(--main-dark)
+    }
+
+    .input:not(:last-child) {
+        margin-bottom: 29px
+    }
+
+    .continue-btn {
+        padding: 0;
+        background-color: var(--orange);
+        color: white;
+        letter-spacing: 3px
+    }
+
+        .continue-btn:hover {
+            cursor: pointer
+        }
+
+    .hide {
+        display: none;
+    }
+</style>
+
+
+
+
+<div id="app">
+
+    <div class="login-container">
+        <div class="scene-image-container">
+
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/3c157545202343.58298e2d490f0.jpg" class="scene-image light-image" />
+            <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/241f7845202343.58298e2d49e33.jpg" class="scene-image dark-image" />
+        </div>
+
+        <div class="login-form">
+            <div class="dark-mode-toggle">
+                <div class="dark-mode-toggle-switch"></div>
+            </div>
+
+
+            <form id="registerForm" class="row" asp-route-returnUrl="@Model.ReturnUrl" method="post">
+                <div class="login-form-title">
+                    <h1><span class="form-action-si">Sign UP to</span><span class="the-valley">Bookstore</span></h1>
+                    <h2>Don't have an account? <a class="signup-btn form-state-btn"  <a asp-page="./Login" asp-route-returnUrl="@Model.ReturnUrl">Login user</a></h2>
+                </div>
+
+                @*login Email*@
+
+
+
+
+                <input asp-for="Input.Email" class="input form-control" placeholder="Email" type="email" autocomplete="username" aria-required="true" />
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
-                
-
-                <input asp-for="Input.FirstName" class="form-control" aria-required="true" />
-                <label asp-for="Input.FirstName"></label>
+                @*login FirstName*@
+                <input asp-for="Input.FirstName" class="input form-control" placeholder="FirstName" aria-required="true" />
                 <span asp-validation-for="Input.FirstName" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
-               
-
-                <input asp-for="Input.LastName" class="form-control" aria-required="true" />
-                <label asp-for="Input.LastName"></label>
+                 <input asp-for="Input.LastName" class="input form-control" placeholder="LastName" aria-required="true" />
                 <span asp-validation-for="Input.LastName" class="text-danger"></span>
-            </div>
+                @*login PhoneNumber*@
 
-            <div class="form-group form-floating py-2 col-6">
-              
-
-                <input asp-for="Input.PhoneNumber" class="form-control" aria-required="true" />
-                <label asp-for="Input.PhoneNumber"></label>
+                <input asp-for="Input.PhoneNumber" class="input form-control" placeholder="PhoneNumber" aria-required="true" />
                 <span asp-validation-for="Input.PhoneNumber" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
-                                
 
-                <input asp-for="Input.StreetAddress" class="form-control" aria-required="true" />
-                <label asp-for="Input.StreetAddress"></label>
-                <span asp-validation-for="Input.StreetAddress" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
 
-                <input asp-for="Input.City" class="form-control" aria-required="true" />
-                <label asp-for="Input.City"></label>
 
+                @*login City*@
+
+                <input asp-for="Input.City" class=" input form-control" placeholder="City" aria-required="true" />
                 <span asp-validation-for="Input.City" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
+                @*login PostalCode*@
 
-                <input asp-for="Input.State" class="form-control" aria-required="true" />
-                <label asp-for="Input.State"></label>
-
-                <span asp-validation-for="Input.State" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
-
-                <input asp-for="Input.PostalCode" class="form-control" aria-required="true" />
-                <label asp-for="Input.PostalCode"></label>
+                <input asp-for="Input.PostalCode" class=" input form-control" placeholder="PostalCode" aria-required="true" />
 
                 <span asp-validation-for="Input.PostalCode" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
-                                
 
-                <input asp-for="Input.Password" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.Password"></label>
+
+
+                @*login Password*@
+
+                <input asp-for="Input.Password" class="input form-control" placeholder="Password" type="password" autocomplete="new-password" aria-required="true" />
+
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
-            </div>
-            <div class="form-group form-floating py-2 col-6">
+                @*login ConfirmPassword*@
 
-                <input asp-for="Input.ConfirmPassword" class="form-control" autocomplete="new-password" aria-required="true" />
-                <label asp-for="Input.ConfirmPassword"></label>
+                <input asp-for="Input.ConfirmPassword" class="input form-control" placeholder="ConfirmPassword" type="password" autocomplete="new-password" aria-required="true" />
 
                 <span asp-validation-for="Input.ConfirmPassword" class="text-danger"></span>
-            </div>
-             @if(User.IsInRole(SD.Role_Admin)){
-            <div class="form-group form-floating py-2 col-6">
 
-            <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" class=form-select>
-                    <label asp-for="Input.RoleList"></label>
+                @if (User.IsInRole(SD.Role_Admin))
+                {
 
-                <option disabled selected>-Select Role-</option>
-            </select>
-            </div>
-            <div class=" form-group form-floating py-2 col-6">
-                <select asp-for="Input.CompanyId" style="display:none;" asp-items="@Model.Input.CompanyList" class=form-select>
-                    <option disabled selected>-Select Company-</option>
-                </select>
 
-            </div>
-            }
-            <button type="submit" class="btn btn-primary mt-4 col-6">Register</button>
-        </form>
-    </div>
-       @if (!User.IsInRole(SD.Role_Admin))
-    {
-        <div class="col mt-2 col-md-offset-2">
-            <section>
-                <h4>Use another service to register.</h4>
-                <hr />
-                @{
-                    if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                    {
+                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" placeholder="RoleList" class=form-select>
+
+
+                        <option disabled selected>-Select Role-</option>
+                    </select>
+
+
+                    <select asp-for="Input.CompanyId" style="display:none;" asp-items="@Model.Input.CompanyList" class=form-select>
+                        <option disabled selected>-Select Company-</option>
+                    </select>
+
+
+                }
+
+
+                <button type="submit" class="btn btn-primary mt-4 col-6">Register</button>
+
+
+                <p class="text-center fw-bold mx-3 mb-0 text-muted">Or Sign in with social platforms</p>
+
+            </form>
+
+
+            @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
                         <div>
                             <p>
-                                There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                                for details on setting up this ASP.NET application to support logging in via external services.
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-light " name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                        @{
+                                            string imageSrc = string.Empty;
+                                            if (provider.DisplayName == "Google")
+                                                imageSrc = "https://gfx4arab.com/wp-content/uploads/2020/06/google-icon.svg";
+                                            else if (provider.DisplayName == "Facebook")
+                                                imageSrc = "https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-png-transparent.png";
+                                            else if (provider.DisplayName == "Microsoft")
+                                                imageSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Microsoft_Store_logo.svg/1200px-Microsoft_Store_logo.svg.png";
+                                        }
+                                        <img src="@imageSrc" alt="@provider.DisplayName" style="height: 20px;" />
+
+                                    </button>
+                                }
                             </p>
                         </div>
-                    }
-                    else
-                    {
-                        <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                            <div>
-                                <p>
-                                    @foreach (var provider in Model.ExternalLogins)
-                                    {
-                                        <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                    }
-                                </p>
-                            </div>
-                        </form>
-                    }
+                    </form>
                 }
-            </section>
+            }
+
+
+        </div>
+
     </div>
-    }
 </div>
-</div>
+
+
+
+
+
+
+
+
+@*LIGIN*@
+
 
 @section Scripts {
     <partial name="_ValidationScriptsPartial" />
-    <script>
-        $(document).ready(function () {
-            $('#Input_Role').change(function () {
-                var selection = $('#Input_Role Option:Selected').text();
-                if (selection != 'Company') {
-                    $('#Input_CompanyId').hide();
-                }
-                else {
-                    $('#Input_CompanyId').show();
-                }
-            })
+    }
+
+<script>
+
+
+    const elements = {
+        app: document.querySelector('#app'),
+        darkToggle: document.querySelector('.dark-mode-toggle'),
+
+
+
+        formActionSu: document.querySelector('.form-action-su'),
+
+        signInBtn: document.querySelector('.signin-btn'),
+        fullNameInput: document.querySelector('.full-name-input'),
+
+
+    }
+
+    const toggleClass = (el, className) => {
+        const cl = el.classList;
+        cl.contains(className) ? cl.remove(className) : cl.add(className)
+    }
+
+    const toggleDarkMode = () => {
+        // const elClassList = elements.darkToggleSwitch.classList
+        const appClassList = elements.app.classList
+        // elClassList.contains('dark') ? elClassList.remove('dark') : elClassList.add('dark')
+
+        appClassList.contains('dark') ? appClassList.remove('dark') : appClassList.add('dark')
+    }
+
+    const signupForm = () => {
+
+        toggleClass(elements.formActionSi, 'hide');
+        toggleClass(elements.formActionSu, 'hide');
+        toggleClass(elements.signUpBtn, 'hide');
+        toggleClass(elements.signInBtn, 'hide');
+        toggleClass(elements.fullNameInput, 'hide')
+    }
+
+    const continueForm = e => {
+        e.preventDefault();
+    }
+
+    elements.darkToggle.addEventListener('click', toggleDarkMode);
+
+
+    elements.continueBtn.addEventListener('click', continueForm);
+    $(document).ready(function () {
+        $('#Input_Role').change(function () {
+            var selection = $('#Input_Role Option:Selected').text();
+            if (selection != 'Company') {
+                $('#Input_CompanyId').hide();
+            }
+            else {
+                $('#Input_CompanyId').show();
+            }
         })
-    </script>
-}
+    })
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+

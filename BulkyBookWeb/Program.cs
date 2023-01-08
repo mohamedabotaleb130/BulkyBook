@@ -34,6 +34,21 @@ builder.Services.AddPaging();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
 builder.Services.AddSingleton<IEmailSender, EmailSender>();
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+builder.Services.AddAuthentication()
+			   .AddGoogle(options =>
+			   {
+				   IConfigurationSection googleAuthSection = builder.Configuration.GetSection("Authentication:Google");
+
+				   options.ClientId = googleAuthSection["ClientId"];
+				   options.ClientSecret = googleAuthSection["ClientSecret"];
+			   })
+.AddMicrosoftAccount(microsoftOptions =>
+ {
+     microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
+     microsoftOptions.ClientSecret = builder. Configuration["Authentication:Microsoft:ClientSecret"];
+ });
+
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
 	options.AppId = "397516645893404";

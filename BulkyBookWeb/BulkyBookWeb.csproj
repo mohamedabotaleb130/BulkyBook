@@ -4,6 +4,7 @@
     <TargetFramework>net7.0</TargetFramework>
     <Nullable>enable</Nullable>
     <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>3f0dbcb7-4964-4d64-85bf-f17d365ad75c</UserSecretsId>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,6 +14,8 @@
   <ItemGroup>
     <PackageReference Include="LazZiya.TagHelpers" Version="6.0.2" />
     <PackageReference Include="Microsoft.AspNetCore.Authentication.Facebook" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.Google" Version="7.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Authentication.MicrosoftAccount" Version="7.0.1" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.11" />
     <PackageReference Include="Microsoft.AspNetCore.Identity.UI" Version="7.0.0" />
     <PackageReference Include="Microsoft.AspNetCore.Mvc.Razor.RuntimeCompilation" Version="7.0.0" />

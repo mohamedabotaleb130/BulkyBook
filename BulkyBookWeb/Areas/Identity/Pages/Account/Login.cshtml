@@ -1,6 +1,6 @@
 ﻿@page
 @model LoginModel
-<div class="container ">
+
 
 
 @{
@@ -119,8 +119,8 @@ background-color: #000000;
 background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='100%25' height='100%25' viewBox='0 0 1200 800'%3E%3Cdefs%3E%3CradialGradient id='a' cx='0' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%230b132d'/%3E%3Cstop offset='1' stop-color='%230b132d' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='b' cx='1200' cy='800' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%2318031d'/%3E%3Cstop offset='1' stop-color='%2318031d' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='c' cx='600' cy='0' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%231e0d4a'/%3E%3Cstop offset='1' stop-color='%231e0d4a' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='d' cx='600' cy='800' r='600' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23000000'/%3E%3Cstop offset='1' stop-color='%23000000' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='e' cx='0' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23162759'/%3E%3Cstop offset='1' stop-color='%23162759' stop-opacity='0'/%3E%3C/radialGradient%3E%3CradialGradient id='f' cx='1200' cy='0' r='800' gradientUnits='userSpaceOnUse'%3E%3Cstop offset='0' stop-color='%23300639'/%3E%3Cstop offset='1' stop-color='%23300639' stop-opacity='0'/%3E%3C/radialGradient%3E%3C/defs%3E%3Crect fill='url(%23a)' width='1200' height='800'/%3E%3Crect fill='url(%23b)' width='1200' height='800'/%3E%3Crect fill='url(%23c)' width='1200' height='800'/%3E%3Crect fill='url(%23d)' width='1200' height='800'/%3E%3Crect fill='url(%23e)' width='1200' height='800'/%3E%3Crect fill='url(%23f)' width='1200' height='800'/%3E%3C/svg%3E");
 }
 .login-container {
-  width: 1000px;
-  height: 600px;
+  width: 1050px;
+  height: 650px;
   display: flex;
   overflow: hidden;
   border-radius: 40px;
@@ -227,7 +227,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     width: 75%;
     margin: auto;
     padding-bottom: 34px;
-    border-bottom: 1px solid var(--main-dark);
+   
 }
 
 #app.dark .login-form-title h2 {
@@ -263,7 +263,7 @@ form {
 }
 
 #app.dark input.input {
-  background-color: #ffffff2e
+  background-color: #ffff
 }
 
 .input:focus {
@@ -294,27 +294,87 @@ form {
   </style>
    <div id="app">
   <div class="login-container">
+
     <div class="scene-image-container">
+
       <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/3c157545202343.58298e2d490f0.jpg" class="scene-image light-image" />
       <img src="https://mir-s3-cdn-cf.behance.net/project_modules/2800_opt_1/241f7845202343.58298e2d49e33.jpg" class="scene-image dark-image" />
-    </div>
-    <div class="login-form">
+      </div>
+
+      <div class="login-form">
       <div class="dark-mode-toggle">
         <div class="dark-mode-toggle-switch"></div>
       </div>
+       <form id="account" method="post">
       <div class="login-form-title">
-        <h1><span class="form-action-si">Sign In to</span><span class="form-action-su hide">Sign Up for</span><span class="the-valley">The Valley</span></h1>
-        <h2>Don't have an account? <a class="signup-btn form-state-btn" href="javascript:;">Sign Up</a><a class="signin-btn form-state-btn hide" href="javascript:;">Sign In</a></h2>
-      </div>
-      <form>
-        <input class="input full-name-input hide" placeholder="Full Name" type="text"/>
-        <input class="input" placeholder="Email" type="email"/>
-        <input class="input" placeholder="Password" type="password"/>
-        <button class="input continue-btn" type="submit">Continue</button>
-            </form>
+                <h1><span class="form-action-si">Sign In to</span><span class="the-valley">Bookstore</span></h1>
+                <h2>Don't have an account? <a class="signup-btn form-state-btn"  <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register user</a></h2>
+       </div>
+
+
+                <span asp-validation-for="Input.Email" class="text-danger"></span>
+                <input asp-for="Input.Email" class="input form-control" placeholder="Email" type="email" />
+               
+
+                <span asp-validation-for="Input.Password" class="text-danger"></span>
+
+                <input asp-for="Input.Password" class="input form-control" placeholder="Password" type="password" />
+
+
+                <div class="checkbox ">
+                    <label class="text-center fw-bold mx-3 mb-0 text-muted" asp-for="Input.RememberMe ">
+                        <input asp-for="Input.RememberMe" />
+                        @Html.DisplayNameFor(m => m.Input.RememberMe)
+                    </label>
+                </div>
+
+                <div class="form-group mt-2">
+                    <button class="input continue-btn" type="submit">Log in</button>
+
+                </div>
+             
+                <p class="text-center fw-bold mx-3 mb-0 text-muted">Or Sign in with social platforms</p>
+
+       </form>
+            
+               
+             @{
+                if ((Model.ExternalLogins?.Count ?? 0) == 0)
+                {
+                  
+                }
+                else
+                {
+                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
+                        <div>
+                            <p>
+                                @foreach (var provider in Model.ExternalLogins)
+                                {
+                                    <button type="submit" class="btn btn-light " name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">
+                                        @{
+                                            string imageSrc = string.Empty;
+                                            if (provider.DisplayName == "Google")
+                                                imageSrc = "https://gfx4arab.com/wp-content/uploads/2020/06/google-icon.svg";
+                                            else if (provider.DisplayName == "Facebook")
+                                                imageSrc = "https://cdn.freebiesupply.com/logos/large/2x/facebook-3-logo-png-transparent.png";
+                                            else if (provider.DisplayName == "Microsoft")
+                                                imageSrc = "https://upload.wikimedia.org/wikipedia/commons/thumb/e/eb/Microsoft_Store_logo.svg/1200px-Microsoft_Store_logo.svg.png";
+                                        }
+                                        <img src="@imageSrc" alt="@provider.DisplayName" style="height: 20px;" />
+                                        
+                                    </button>
+                                }
+                            </p>
+                        </div>
+                    </form>
+                }
+            }
+                 
+           
     </div>
     
-           
+   </div>
+   </div>
 
            
           
@@ -322,16 +382,15 @@ form {
 
         
 
+
+
+
+
+
+
+
    
-    
-    <hr />
-
-
-
-
-
-
-
+   
 
 
 
@@ -353,14 +412,14 @@ form {
     const elements = {
         app: document.querySelector('#app'),
         darkToggle: document.querySelector('.dark-mode-toggle'),
-        signUp: document.querySelector('.signup-btn'),
+        
         loginContainer: document.querySelector('.login-container'),
-        formActionSi: document.querySelector('.form-action-si'),
+        
         formActionSu: document.querySelector('.form-action-su'),
-        signUpBtn: document.querySelector('.signup-btn'),
+        
         signInBtn: document.querySelector('.signin-btn'),
         fullNameInput: document.querySelector('.full-name-input'),
-        continueBtn: document.querySelector('.continue-btn')
+        
 
     }
 
@@ -378,7 +437,7 @@ form {
     }
 
     const signupForm = () => {
-        toggleClass(elements.loginContainer, 'signup');
+ 
         toggleClass(elements.formActionSi, 'hide');
         toggleClass(elements.formActionSu, 'hide');
         toggleClass(elements.signUpBtn, 'hide');
@@ -392,8 +451,6 @@ form {
 
     elements.darkToggle.addEventListener('click', toggleDarkMode);
 
-    elements.signUpBtn.addEventListener('click', signupForm);
-    elements.signInBtn.addEventListener('click', signupForm);
-
+   
     elements.continueBtn.addEventListener('click', continueForm);
 </script>
