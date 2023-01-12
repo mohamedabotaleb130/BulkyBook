@@ -1,7 +1,7 @@
 ﻿@page
 @using BulkyBook.Utility
 
-
+<div class="container"
 @model RegisterModel
 @{
 
@@ -9,15 +9,18 @@
 @if (User.IsInRole(SD.Role_Admin))
 {
 
-    <h1 class="">Register-ADMIN PORTAL</h1>
+    <h3 class="">Register-ADMIN </h3>
 }
 else
 {
-    <h1 class="">@ViewData["Title"]</h1>
+    <h2 class="">@ViewData["Title"]</h2>
 }
 
-<style>
+</div>
+    
 
+<style>
+   
     :root {
         --main-dark: #292c46;
         --main-light: #f3f3f3;
@@ -157,9 +160,9 @@ else
 
     .login-form-title h2 {
         font-size: .9rem;
-        width: 75%;
+        width: 60%;
         margin: auto;
-        padding-bottom: 34px;
+        padding-bottom: 2px;
     }
 
     #app.dark .login-form-title h2 {
@@ -180,7 +183,7 @@ else
         display: flex;
         flex-direction: column;
         align-items: center;
-        margin-top: 34px;
+        margin-top: -2px;
     }
 
     .input {
@@ -292,7 +295,7 @@ else
                 {
 
 
-                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" placeholder="RoleList" class=form-select>
+                    <select asp-for="Input.Role" asp-items="@Model.Input.RoleList" placeholder="RoleList" class="input form-select">
 
 
                         <option disabled selected>-Select Role-</option>
@@ -307,7 +310,7 @@ else
                 }
 
 
-                <button type="submit" class="btn btn-primary mt-4 col-6">Register</button>
+                <button type="submit" class="input continue-btn">Register</button>
 
 
                 <p class="text-center fw-bold mx-3 mb-0 text-muted">Or Sign in with social platforms</p>
@@ -424,7 +427,7 @@ else
                 $('#Input_CompanyId').show();
             }
         })
-    })
+    });
 </script>
 
 

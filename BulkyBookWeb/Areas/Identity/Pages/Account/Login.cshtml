@@ -7,86 +7,6 @@
     ViewData["Title"] = "Log in";
 }
 
-
-
-
-@*<div class="row">
-      
-    <div class="col-md-4">
-        <section>
-            <form id="account" method="post">
-                <h4>Use a local account to log in.</h4>
-                <hr />
-                <div asp-validation-summary="All" class="text-danger"></div>
-
-                <div class="form-group">
-                    <label asp-for="Input.Email"></label>
-                    <input asp-for="Input.Email" class="form-control" />
-                    <span asp-validation-for="Input.Email" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <label asp-for="Input.Password"></label>
-                    <input asp-for="Input.Password" class="form-control" />
-                    <span asp-validation-for="Input.Password" class="text-danger"></span>
-                </div>
-                <div class="form-group">
-                    <div class="checkbox">
-                        <label asp-for="Input.RememberMe">
-                            <input asp-for="Input.RememberMe" />
-                            @Html.DisplayNameFor(m => m.Input.RememberMe)
-                        </label>
-                    </div>
-                </div>
-                <div class="form-group">
-                    <button type="submit" class="btn btn-primary">Log in</button>
-                </div>
-                <div class="form-group">
-                    <p>
-                        <a id="forgot-password" asp-page="./ForgotPassword">Forgot your password?</a>
-                    </p>
-                    <p>
-                        <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register as a new user</a>
-                    </p>
-                    <p>
-                        <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a>
-                    </p>
-                </div>
-            </form>
-        </section>
-    </div>
-    <div class="col-md-6 col-md-offset-2">
-        <section>
-            <h4>Use another service to log in.</h4>
-            <hr />
-            @{
-                if ((Model.ExternalLogins?.Count ?? 0) == 0)
-                {
-                    <div>
-                        <p>
-                            There are no external authentication services configured. See <a href="https://go.microsoft.com/fwlink/?LinkID=532715">this article</a>
-                            for details on setting up this ASP.NET application to support logging in via external services.
-                        </p>
-                    </div>
-                }
-                else
-                {
-                    <form id="external-account" asp-page="./ExternalLogin" asp-route-returnUrl="@Model.ReturnUrl" method="post" class="form-horizontal">
-                        <div>
-                            <p>
-                                @foreach (var provider in Model.ExternalLogins)
-                                {
-                                    <button type="submit" class="btn btn-primary" name="provider" value="@provider.Name" title="Log in using your @provider.DisplayName account">@provider.DisplayName</button>
-                                }
-                            </p>
-                        </div>
-                    </form>
-                }
-            }
-        </section>
-    </div>
-  </div>*@
-
-
         
   <style>
       
@@ -226,7 +146,7 @@ background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/s
     font-size: .9rem;
     width: 75%;
     margin: auto;
-    padding-bottom: 34px;
+    padding-bottom: 18px;
    
 }
 
@@ -303,11 +223,11 @@ form {
 
       <div class="login-form">
       <div class="dark-mode-toggle">
-        <div class="dark-mode-toggle-switch"></div>
+                <div class="dark-mode-toggle-switch mt-0"></div>
       </div>
        <form id="account" method="post">
       <div class="login-form-title">
-                <h1><span class="form-action-si">Sign In to</span><span class="the-valley">Bookstore</span></h1>
+                    <h1><span class="form-action-si ">Sign In to</span><span class="the-valley">Bookstore</span></h1>
                 <h2>Don't have an account? <a class="signup-btn form-state-btn"  <a asp-page="./Register" asp-route-returnUrl="@Model.ReturnUrl">Register user</a></h2>
        </div>
 
@@ -315,25 +235,29 @@ form {
                 <span asp-validation-for="Input.Email" class="text-danger"></span>
                 <input asp-for="Input.Email" class="input form-control" placeholder="Email" type="email" />
                
-
+                <div class="form-group mt-0">
                 <span asp-validation-for="Input.Password" class="text-danger"></span>
 
                 <input asp-for="Input.Password" class="input form-control" placeholder="Password" type="password" />
+                </div>
 
-
-                <div class="checkbox ">
+                <div class="checkbox  mt-3 col-10 ">
                     <label class="text-center fw-bold mx-3 mb-0 text-muted" asp-for="Input.RememberMe ">
                         <input asp-for="Input.RememberMe" />
                         @Html.DisplayNameFor(m => m.Input.RememberMe)
                     </label>
+
                 </div>
 
                 <div class="form-group mt-2">
                     <button class="input continue-btn" type="submit">Log in</button>
 
                 </div>
-             
-                <p class="text-center fw-bold mx-3 mb-0 text-muted">Or Sign in with social platforms</p>
+                <div class=" form-group mt-2 col-9 ">
+                    <a id="forgot-password" asp-page="./ForgotPassword" > Forgot your password?</a>
+                    <p> <a id="resend-confirmation" asp-page="./ResendEmailConfirmation">Resend email confirmation</a></p>
+             </div>
+                <p class="text-center fw-bold mx-3 mb-0 text-muted mt-0 p-0 ">Or Sign in with social platforms</p>
 
        </form>
             

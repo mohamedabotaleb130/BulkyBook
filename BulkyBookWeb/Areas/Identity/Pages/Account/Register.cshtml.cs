@@ -37,7 +37,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
         private readonly IEmailSender _emailSender;
         private readonly RoleManager<IdentityRole> _roleManager;
         private readonly IUnitOfWork _unitOfWork;
-
+        private readonly IWebHostEnvironment _hostEnvironment;
 
         public RegisterModel(
             UserManager<ApplicationUser> userManager,
@@ -48,13 +48,14 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
 
             RoleManager<IdentityRole> roleManager,
 
-           IUnitOfWork unitOfWork)
-
+           IUnitOfWork unitOfWork,
+             IWebHostEnvironment hostEnvironment)
         //RoleManager<ApplicationUser> roleManagers)
         {
 
             _userManager = userManager;
             _userStore = userStore;
+            _hostEnvironment = hostEnvironment;
             _emailStore = GetEmailStore();
             _signInManager = signInManager;
             _logger = logger;
@@ -119,7 +120,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
             ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
             ///     directly from your code. This API may change or be removed in future releases.
             /// </summary>
-             [Required]
+            [Required]
             [DataType(DataType.Password)]
             [Display(Name = "Confirm password")]
             [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
@@ -174,7 +175,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
 
         }
 
-        public async Task<IActionResult> OnPostAsync(string? returnUrl = null)
+        public async Task<IActionResult> OnPostAsync(string  returnUrl = null)
         {
             returnUrl ??= Url.Content("~/");
             ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -225,8 +226,49 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
                         values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
                         protocol: Request.Scheme);
 
-                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email",
-                        $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.");
+
+
+
+
+                    var PathToFile = _hostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
+                        + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates"
+                        + Path.DirectorySeparatorChar.ToString() + "Confirm_Account_Registration.html";
+
+                    var subject = "Confirm Account Registration";
+                    string HtmlBody = "";
+                    using (StreamReader streamReader = System.IO.File.OpenText(PathToFile))
+                    {
+                        HtmlBody = streamReader.ReadToEnd();
+                    }
+
+                    //{0} : Subject  
+                    //{1} : DateTime  
+                    //{2} : Name  
+                    //{3} : Email  
+                    //{4} : Message  
+                    //{5} : callbackURL  
+
+                    string Message = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+
+                    string messageBody = string.Format(HtmlBody,
+                        subject,
+                        String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
+                        user.FirstName,
+                        user.LastName,
+                        user.Email,
+                        Message,
+                        callbackUrl
+                        );
+
+
+
+
+
+
+
+
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", messageBody);
 
                     if (_userManager.Options.SignIn.RequireConfirmedAccount)
                     {
