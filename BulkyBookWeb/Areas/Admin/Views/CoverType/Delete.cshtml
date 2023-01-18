@@ -2,9 +2,10 @@
 
 <form method="post" asp-action="Delete">
 	<input asp-for="Id" hidden />
+	<div class=" container p-3"
 	<div class="border p-3 mt-4">
 		<div class="row pb-2">
-			<h2 class="text-primary">Delete CoverType</h2>
+			<h1 class="text-primary"><i class="fa-solid fa-trash"></i>Delete CoverType</h1>
 			<hr />
 		</div>
 		@*<div asp-validation-summary="All"></div>*@
@@ -13,12 +14,14 @@
 			<input asp-for="Name" disabled class="form-control" />
 		</div>
 		
-		<button type="submit" class="btn btn-danger" style="width:150px">Delete</button>
+		<button type="submit" class="btn btn-danger" style="width:150px"><i class="bi bi-trash"></i>Delete</button>
 		<a asp-controller="CoverType" asp-action="Index" class="btn btn-secondary" style="width:150px">
-			Back to List
+			Back to List<i class="fa-solid fa-circle-left"></i>
 		</a>
 	</div>
+	</div>
 </form>
+	
 
 @section Scripts{
 	@{

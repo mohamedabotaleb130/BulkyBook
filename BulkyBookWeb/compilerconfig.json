@@ -6,5 +6,9 @@
   {
     "outputFile": "wwwroot/carousel/scss/stree.css",
     "inputFile": "wwwroot/carousel/scss/stree.scss"
+  },
+  {
+    "outputFile": "wwwroot/carousel/scss/sss.css",
+    "inputFile": "wwwroot/carousel/scss/sss.scss"
   }
 ]

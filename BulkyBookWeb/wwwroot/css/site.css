@@ -169,7 +169,7 @@ img {
 }
 
 .pricing-table {
-    background-color: #e9ecefa1;
+    background-color: #ffffffa1;
     font-family: 'Montserrat', sans-serif;
 }
 
@@ -259,3 +259,7 @@ img {
         padding: 9px 0;
     }
 
+.toastr-top-right {
+    top: 60px;
+    right: 12px;
+}
