@@ -20,8 +20,8 @@ namespace BulkyBook.Utility
             {
                 emailClient.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTls);
                 //emailClient.Authenticate("momoabo80@gmail.com", "btsdtqrdlhccfima");
-                //emailClient.Authenticate("momoabo80@gmail.com", "ywlcbthcsqreqsrk");
-                emailClient.Authenticate("conrad28@ethereal.email'", "XsFrCw3FHpkKp9FvAx");
+                //emailClient.Authenticate("momoabo80@gmail.com", "tlorcmgfswsgcisd");
+                emailClient.Authenticate("julio.pfeffer11@ethereal.email", "TqScxCsp445Qp84xNe");
                 emailClient.Send(emailToSend);
                 emailClient.Disconnect(true);
             }

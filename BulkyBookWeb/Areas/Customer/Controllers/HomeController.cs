@@ -5,6 +5,7 @@ using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 using System.Security.Claims;
+using X.PagedList;
 
 namespace BulkyBookWeb.Areas.Customer.Controllers
 {
@@ -22,11 +23,12 @@ namespace BulkyBookWeb.Areas.Customer.Controllers
 			_unitOfWork = unitOfWork;
 		}
 
-		public IActionResult Index()
+		public IActionResult Index(int? page)
 		{
 			IEnumerable<Product> productList = _unitOfWork.Product.GetAll(includeProperties: "Category,CoverType");
-
-			return View(productList);
+			int pageSize = 8; // Configure paging size
+			int pageNumber = (page ?? 1);
+			return View(productList.ToPagedList(pageNumber, pageSize));
 		}
 
 

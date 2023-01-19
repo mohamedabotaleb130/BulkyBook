@@ -117,42 +117,6 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
            }
             return Page();
         }
-        //public async Task<IActionResult> OnPostAsync(string returnUrl = null)
-        //{
-        //    returnUrl ??= Url.Content("~/");
-
-        //    ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
-
-        //    var username = new EmailAddressAttribute().IsValid(Input.Email) ? new MailAddress(Input.Email).User : Input.Email;
-        //    //var username = new EmailAddressAttribute().IsValid(Input.Email) ? _userManager.FindByEmailAsync(Input.Email).Result.UserName : Input.Email;
-        //    if (ModelState.IsValid)
-        //    {
-        //        // This doesn't count login failures towards account lockout
-        //        // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-        //        var result = await _signInManager.PasswordSignInAsync(username, Input.Password, Input.RememberMe, lockoutOnFailure: false);
-        //        if (result.Succeeded)
-        //        {
-        //            _logger.LogInformation("User logged in.");
-        //            return LocalRedirect(returnUrl);
-        //        }
-        //        if (result.RequiresTwoFactor)
-        //        {
-        //            return RedirectToPage("./LoginWith2fa", new { ReturnUrl = returnUrl, RememberMe = Input.RememberMe });
-        //        }
-        //        if (result.IsLockedOut)
-        //        {
-        //            _logger.LogWarning("User account locked out.");
-        //            return RedirectToPage("./Lockout");
-        //        }
-        //        else
-        //        {
-        //            ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-        //            return Page();
-        //        }
-        //    }
-
-        //    // If we got this far, something failed, redisplay form
-        //    return Page();
-        //}
+        
     }
 }

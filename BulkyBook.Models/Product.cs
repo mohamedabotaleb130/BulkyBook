@@ -25,26 +25,26 @@ namespace BulkyBook.Models
         [Required]
         [Range(1, 10000)]
         [Display(Name = "List Price")]
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+
+        [DisplayFormat(DataFormatString = "{0:c}")]
 
         public double ListPrice { get; set; }
         [Required]
         [Range(1, 10000)]
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
-
+        [DisplayFormat(DataFormatString = "{0:c}")]
         [Display(Name = "Price for 1-50")]
         public double Price { get; set; }
 
         [Required]
         [Range(1, 10000)]
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
 
         [Display(Name = "Price for 51-100")]
         public double Price50 { get; set; }
 
         [Required]
         [Display(Name = "Price for 100+")]
-        [DisplayFormat(DataFormatString = "{0:C}", ApplyFormatInEditMode = true)]
+        [DisplayFormat(DataFormatString = "{0:c}")]
 
         [Range(1, 10000)]
         public double Price100 { get; set; }

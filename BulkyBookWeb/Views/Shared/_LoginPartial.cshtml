@@ -8,11 +8,11 @@
     @if (SignInManager.IsSignedIn(User))
     {
         @*@if (UserManager.GetUserAsync(User).Result.ProfilePicture != null)
-        {
-            <li class="nav-item">
-                <img class="avatar rounded-circle" alt="profile" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))" />
-            </li>
-        }*@
+    {
+    <li class="nav-item">
+    <img class="avatar rounded-circle" alt="profile" src="data:image/*;base64,@(Convert.ToBase64String(UserManager.GetUserAsync(User).Result.ProfilePicture))" />
+    </li>
+    }*@
         <li class="nav-item">
             <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Manage/Index" title="Manage">Hello @User.Identity.Name!</a>
         </li>
@@ -25,10 +25,11 @@
     else
     {
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="	fas fa-user-tie"></i>Register</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Register"><i class="bi bi-person"></i>Register</a>
         </li>
         <li class="nav-item">
-            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login"><i class="fa-solid fa-right-to-bracket"></i>Login</a>
+            <a class="nav-link text-dark" asp-area="Identity" asp-page="/Account/Login">Login<i class="bi bi-lock"></i></a>
+      
         </li>
     }
 </ul>
