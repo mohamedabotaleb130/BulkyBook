@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BulkyBook.Models
 {
-	internal class Paper
+	public class Paper
 	{
 		public int TotalItems { get; set; }
 		public int CurrentPage { get; set; }

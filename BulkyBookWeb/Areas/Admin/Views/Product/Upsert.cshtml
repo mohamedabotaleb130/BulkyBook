@@ -8,7 +8,7 @@
 		<div class="col-10">
 			<div class="border p-3 mt-4 row">
 				<div class="col-12 pb-2">
-					<h2 class="text-primary">@(Model.Product.Id != 0 ? "Update" : "Create")  Product</h2>
+					<h1 class="text-primary"><i class="fa-solid fa-arrows-rotate"></i>@(Model.Product.Id != 0 ? "Update" : "Create")  Product</h1>
 					<hr />
 				</div>
 				@*<div asp-validation-summary="All"></div>*@
@@ -75,14 +75,14 @@
 				<div class="col-12">
 					@if (Model.Product.Id != 0)
 					{
-						<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+						<button type="submit" class="btn btn-primary" style="width:150px"><i class="fa-solid fa-pen-to-square"></i>Update</button>
 					}
 					else
 					{
 						<button type="submit" onclick="return ValidateInput()" class="btn btn-primary" style="width:150px">Create</button>
 					}
 					<a asp-controller="Product" asp-action="Index" class="btn btn-secondary" style="width:150px">
-						Back to List
+						Back to List<i class="bi bi-arrow-up-left-circle-fill"></i>
 					</a>
 				</div>
 

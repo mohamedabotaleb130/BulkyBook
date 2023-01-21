@@ -2,12 +2,12 @@
 
 <form method="post" asp-action="Upsert" enctype="multipart/form-data">
 	<input asp-for="Id" hidden />
-
-	<div class="row">
+	<div class="container p-2">
+		<div class="row">
 		<div class="col-10">
 			<div class="border p-3 mt-4 row">
 				<div class="col-12 pb-2">
-					<h2 class="text-primary">@(Model.Id != 0 ? "Update" : "Create")  Company</h2>
+						<h1 class="text-primary"><i class="fa-solid fa-arrows-rotate"></i>@(Model.Id != 0 ? "Update" : "Create")  Company<i class="fa-solid fa-building"></i></h1>
 					<hr />
 				</div>
 				@*<div asp-validation-summary="All"></div>*@
@@ -45,20 +45,21 @@
 				<div class="col-12">
 					@if (Model.Id != 0)
 					{
-						<button type="submit" class="btn btn-primary" style="width:150px">Update</button>
+							<button type="submit" class="btn btn-primary" style="width:150px"><i class="fa-solid fa-pen-to-square"></i>Update</button>
 					}
 					else
 					{
-						<button type="submit" class="btn btn-primary" style="width:150px">Create</button>
+							<button type="submit" class="btn btn-primary" style="width:150px"><i class="bi bi-plus-circle"></i>Create</button>
 					}
 					<a asp-controller="Company" asp-action="Index" class="btn btn-secondary" style="width:150px">
-						Back to List
+							Back to List<i class="bi bi-arrow-up-left-circle-fill"></i>
 					</a>
 				</div>
 
 			</div>
 		</div>
 
+	</div>
 	</div>
 </form>
 

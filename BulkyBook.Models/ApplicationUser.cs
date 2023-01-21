@@ -17,8 +17,8 @@ namespace BulkyBook.Models
         [Required, MaxLength(100)]
         public string? LastName { get; set; }
         public int? UsernameChangeLimit { get; set; } = 10;
-        //public byte []? ProfilePicture { get; set; }
-        public string? StreetAddress { get; set; }
+		//public byte[] ProfilePicture { get; set; }
+		public string? StreetAddress { get; set; }
         public string? City { get; set; }
         public string? State { get; set; }
         public string? PostalCode { get; set; }

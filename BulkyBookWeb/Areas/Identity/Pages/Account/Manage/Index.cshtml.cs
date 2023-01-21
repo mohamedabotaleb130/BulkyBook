@@ -64,7 +64,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
                 FirstName = user.FirstName,
                 LastName = user.LastName,
                 PhoneNumber = phoneNumber,
-               // ProfilePicture = user.ProfilePicture
+                // ProfilePicture = user.ProfilePicture
             };
         }
 
@@ -129,7 +129,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account.Manage
                 using (var dataStream = new MemoryStream())
                 {
                     await file.CopyToAsync(dataStream);
-                   // user.ProfilePicture = dataStream.ToArray();
+                    // user.ProfilePicture = dataStream.ToArray();
                 }
 
                 await _userManager.UpdateAsync(user);

@@ -4,13 +4,13 @@
 	<br />
 	<div class="container">
 		<div class="card">
-			<div class="card-header bg-dark text-light ml-0">
+			<div class="card-header bg-dark text-light ml-2">
 				<div class="row">
-					<div class="col-6  pt-2">
+					<div class="col-2  pt-2">
 						<i class="fa fa-shopping-cart"></i> &nbsp;
 						Shopping Cart
 					</div>
-					<div class="col-6 text-end">
+					<div class="col-10 text-end">
 						<a asp-area="Customer" asp-controller="Home" asp-action="Index" class="btn btn-outline-info btn-sm">Continue Shopping</a>
 					</div>
 				</div>
@@ -31,7 +31,7 @@
 							<div class="col-4 text-md-right pt-4">
 								<h6>
 									<strong>
-										@item.Price.ToString("c")
+										@item.Price.ToString("")$
 										<span class="text-muted">&nbsp;x&nbsp;</span>@item.Count
 									</strong>
 								</h6>
@@ -61,7 +61,7 @@
 						<ul class="list-group">
 							<li class="list-group-item d-flex justify-content-between bg-light">
 								<span class="text-info"> Total (USD)</span>
-								<strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("c")</strong>
+								<strong class="text-info">@Model.OrderHeader.OrderTotal.ToString("")$</strong>
 							</li>
 						</ul>
 					</div>

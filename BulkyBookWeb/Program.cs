@@ -13,7 +13,10 @@ using Stripe;
 using System;
 using BulkyBook.Models;
 using BulkyBook.Utility;
+
+
 using ReflectionIT.Mvc.Paging;
+
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -23,7 +26,6 @@ builder.Services.AddDbContext<ApplicationDbContext>(options => options.UseSqlSer
 	));
 builder.Services.Configure<StripeSettings>(builder.Configuration.GetSection("Stripe"));
 
-
 builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.SignIn.RequireConfirmedAccount = true)
                 .AddEntityFrameworkStores<ApplicationDbContext>()
                 .AddDefaultUI()
@@ -32,8 +34,28 @@ builder.Services.AddIdentity<ApplicationUser, IdentityRole>(options => options.S
 builder.Services.AddControllersWithViews();
 builder.Services.AddPaging();
 builder.Services.AddScoped<IUnitOfWork, UnitOfWork>();
-builder.Services.AddSingleton<IEmailSender, EmailSender>();
+
+builder.Services.AddTransient<IEmailSender, EmailSender>();
+
+
+
+
 builder.Services.AddRazorPages().AddRazorRuntimeCompilation();
+
+builder.Services.AddAuthentication()
+			   .AddGoogle(options =>
+			   {
+				   IConfigurationSection googleAuthSection = builder.Configuration.GetSection("Authentication:Google");
+
+				   options.ClientId = googleAuthSection["ClientId"];
+				   options.ClientSecret = googleAuthSection["ClientSecret"];
+			   })
+.AddMicrosoftAccount(microsoftOptions =>
+ {
+     microsoftOptions.ClientId = builder.Configuration["Authentication:Microsoft:ClientId"];
+     microsoftOptions.ClientSecret = builder. Configuration["Authentication:Microsoft:ClientSecret"];
+ });
+
 builder.Services.AddAuthentication().AddFacebook(options =>
 {
 	options.AppId = "397516645893404";
@@ -73,7 +95,7 @@ app.UseStaticFiles();
 
 app.UseRouting();
 StripeConfiguration.ApiKey = builder.Configuration.GetSection("Stripe:SecretKey").Get<string>();
-
+//SeedDatabase();
 app.UseAuthentication();
 
 app.UseAuthorization();
@@ -85,4 +107,11 @@ app.MapControllerRoute(
 
 app.Run();
 
-
+//void SeedDatabase()
+//{
+//    using (var scope = app.Services.CreateScope())
+//    {
+//        var dbInitializer = scope.ServiceProvider.GetRequiredService<IDbInitializer>();
+//        dbInitializer.Initialize();
+//    }
+//}
