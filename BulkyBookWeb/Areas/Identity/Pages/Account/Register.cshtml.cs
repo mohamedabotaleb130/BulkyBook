@@ -175,7 +175,7 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
 
 		}
 
-		public async Task<IActionResult> OnPostAsync(string returnUrl = null)
+		public async Task<IActionResult> OnPostAsync(string  returnUrl = null)
 		{
 			returnUrl ??= Url.Content("~/");
 			ExternalLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync()).ToList();
@@ -223,56 +223,55 @@ namespace BulkyBookWeb.Areas.Identity.Pages.Account
 					var callbackUrl = Url.Page(
 						"/Account/ConfirmEmail",
 						pageHandler: null,
-						values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
-						protocol: Request.Scheme);
+                        values: new { area = "Identity", userId = userId, code = code, returnUrl = returnUrl },
+                        protocol: Request.Scheme);
 
 
 
 
 
-					var PathToFile = _hostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
-						+ "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates"
-						+ Path.DirectorySeparatorChar.ToString() + "Confirm_Account_Registration.html";
+                    var PathToFile = _hostEnvironment.WebRootPath + Path.DirectorySeparatorChar.ToString()
+                        + "Templates" + Path.DirectorySeparatorChar.ToString() + "EmailTemplates"
+                        + Path.DirectorySeparatorChar.ToString() + "Confirm_Account_Registration.html";
 
-					var subject = "Confirm Account Registration";
-					string HtmlBody = "";
-					using (StreamReader streamReader = System.IO.File.OpenText(PathToFile))
+                    var subject = "Confirm Account Registration";
+                    string HtmlBody = "";
+                    using (StreamReader streamReader = System.IO.File.OpenText(PathToFile))
+                    {
+                        HtmlBody = streamReader.ReadToEnd();
+                    }
+
+                    //{0} : Subject  
+                    //{1} : DateTime  
+                    //{2} : Name  
+                    //{3} : Email  
+                    //{4} : Message  
+                    //{5} : callbackURL  
+
+                    string Message = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
+
+                    string messageBody = string.Format(HtmlBody,
+                        subject,
+                        String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
+                        user.FirstName,
+                        user.Email,
+                        Message,
+                        callbackUrl
+                        );
+
+
+
+
+
+
+
+
+
+                    await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", messageBody);
+
+                    if (_userManager.Options.SignIn.RequireConfirmedAccount)
 					{
-						HtmlBody = streamReader.ReadToEnd();
-					}
-
-					//{0} : Subject  
-					//{1} : DateTime  
-					//{2} : Name  
-					//{3} : Email  
-					//{4} : Message  
-					//{5} : callbackURL  
-
-					string Message = $"Please confirm your account by <a href='{HtmlEncoder.Default.Encode(callbackUrl)}'>clicking here</a>.";
-
-					string messageBody = string.Format(HtmlBody,
-						subject,
-						String.Format("{0:dddd, d MMMM yyyy}", DateTime.Now),
-						user.FirstName,
-						user.LastName,
-						user.Email,
-						Message,
-						callbackUrl
-						);
-
-
-
-
-
-
-
-
-
-					await _emailSender.SendEmailAsync(Input.Email, "Confirm your email", messageBody);
-
-					if (_userManager.Options.SignIn.RequireConfirmedAccount)
-					{
-						return RedirectToPage("RegisterConfirmation", new { email = Input.Email, returnUrl = returnUrl });
+						return RedirectToPage("RegisterConfirmation", new { email = Input.Email });
 					}
 					else
 					{
