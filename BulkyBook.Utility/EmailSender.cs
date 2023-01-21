@@ -21,7 +21,7 @@ namespace BulkyBook.Utility
                 emailClient.Connect("smtp.ethereal.email", 587, MailKit.Security.SecureSocketOptions.StartTls);
                 //emailClient.Authenticate("momoabo80@gmail.com", "btsdtqrdlhccfima");
                 //emailClient.Authenticate("momoabo80@gmail.com", "tlorcmgfswsgcisd");
-                emailClient.Authenticate("antonia18@ethereal.email", "fAYTuJzpp24kt8uD3A");
+                emailClient.Authenticate("kattie.homenick43@ethereal.email", "tD7P84QyZY3Z8sCBZG");
                 emailClient.Send(emailToSend);
                 emailClient.Disconnect(true);
             }
