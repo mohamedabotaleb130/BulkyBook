@@ -32,8 +32,7 @@ namespace BulkyBook.Utility
 
 
 
-            //var fromMail = "mohamedabotaleb2019@outlook.com";
-            //var fromPassword = "01028437278abotaleb";
+           
 
             //var message = new MailMessage();
             //message.From = new MailAddress(fromMail);
